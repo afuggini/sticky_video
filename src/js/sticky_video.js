@@ -10,13 +10,15 @@
   StickyVideo.addClass = addClass
   StickyVideo.removeClass = removeClass
   StickyVideo.hasClass = hasClass
+  StickyVideo.wrap = wrap
+  StickyVideo.insertAfter = insertAfter
 
   StickyVideo.prototype.fixElementHeight = fixElementHeight
   StickyVideo.prototype.elementInViewport = elementInViewport
   StickyVideo.prototype.initialize = initialize
 
   function fixElementHeight () {
-    this.container.style.height = this.container.offsetHeight + 'px'
+    this.container.parentElement.style.height = this.container.parentElement.offsetHeight + 'px'
   }
   function addClass (elements, className) {
     if (hasClass(elements, className)) return
@@ -44,6 +46,12 @@
   function hasClass (element, className) {
     return new RegExp('(\\s|^)' + className + '(\\s|$)').test(element.className)
   }
+  function wrap (toWrap, wrapper) {
+    return wrapper.appendChild(toWrap)
+  }
+  function insertAfter (el, referenceNode) {
+    referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling)
+  }
   function elementInViewport (el) {
     var rect = el.getBoundingClientRect()
     return (rect.top > (el.offsetHeight * -1))
@@ -51,17 +59,27 @@
   function initialize () {
     if (!this.container) return
     var that = this
+    var wrapDiv = document.createElement('div')
+
     function onWindowScroll () {
       that.fixElementHeight()
-      if (!that.elementInViewport(that.container)) {
-        StickyVideo.removeClass(that.container, 'sticky-container_in-content')
-        StickyVideo.addClass(that.container, 'sticky-container_sticky')
+      var parent = wrapDiv
+      if (!that.elementInViewport(parent)) {
+        StickyVideo.removeClass(parent, 'sticky-container_in-content')
+        StickyVideo.addClass(parent, 'sticky-container_sticky')
       } else {
-        StickyVideo.removeClass(that.container, 'sticky-container_sticky')
-        StickyVideo.addClass(that.container, 'sticky-container_in-content')
+        StickyVideo.removeClass(parent, 'sticky-container_sticky')
+        StickyVideo.addClass(parent, 'sticky-container_in-content')
       }
     }
-    StickyVideo.addClass(that.container, 'sticky-container_in-content')
+
+    wrapDiv.className = 'sticky-container__wrap'
+    this.container.parentElement.insertBefore(wrapDiv, this.container)
+    StickyVideo.insertAfter(wrapDiv, that.container)
+    StickyVideo.wrap(that.container, wrapDiv)
+    StickyVideo.addClass(wrapDiv, 'sticky-container_in-content')
+    StickyVideo.addClass(that.container, 'sticky-container__video')
+
     window.addEventListener ? window.addEventListener('scroll', onWindowScroll) : window.onscroll = onWindowScroll
   }
 

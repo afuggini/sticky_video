@@ -1,84 +1,22 @@
-body {
-  background: #fafafa;
-  line-height: 1.68;
-  text-rendering: optimizeLegibility;
+.sticky-container__video {
+  height: 270px;
+  width: 480px;
+  right: 0;
+  bottom: 0;
+  position: fixed;
 }
-@font-face {
-  font-family: redactedregular;
-  font-style: normal;
-  font-weight: 400;
-  src: url(../fonts/redacted-regular.eot);
-  src: url(../fonts/redacted-regular.eot?#iefix) format("embedded-opentype"),url(../fonts/redacted-regular.woff2) format("woff2"),url(../fonts/redacted-regular.woff) format("woff"),url(../fonts/redacted-regular.ttf) format("truetype"),url(../fonts/redacted-regular.svg#redactedregular) format("svg");
-}
-.container {
-  font-family: redactedregular;
-  margin: 80px auto;
-  max-width: 720px;
-  padding: 0 30px;
+.sticky-container_in-content .sticky-container__video {
+  padding-bottom: 56.25%;
   position: relative;
-}
-
-.site-content {
-  color: #ddd;
-}
-  .site-content p {
-    line-height: 2.16;
-  }
-  .site-content h2 {
-    margin-bottom: 30px;
-    margin-top: 60px;
-  }
-  .site-content blockquote {
-    border-bottom: 4px solid #eee;
-    border-top: 4px solid #eee;
-    line-height: 1.8;
-    margin-bottom: 50px;
-    margin-top: 50px;
-    padding: 20px 0;
-  }
-  .site-content header {
-    margin-bottom: 3em;
-  }
-  .site-content header h1 {
-    margin-bottom: .6em;
-    margin-top: 0;
-  }
-  .site-content header h2 {
-    color: #ccc;
-    font-size: 1.1em;
-  }
-  .site-content header figure {
-    margin: 2em 0;
-  }
-
-
-.sticky-container {
+  height: 0; width: auto;
+  position: relative;
+  bottom: auto; right: auto;
   overflow: hidden;
 }
-  .sticky-container__video {
-    height: 270px;
-    width: 480px;
-    right: 0;
-    bottom: 0;
-    position: fixed;
-
-    /* transition: width .2s ease-in-out,height .2s ease-in-out,transform .38s ease-in-out,-webkit-transform .38s ease-in-out;
-    transition: width .2s ease-in-out,height .2s ease-in-out,transform .38s ease-in-out;
-    transition: width .2s ease-in-out,height .2s ease-in-out,-webkit-transform .38s ease-in-out;
-    webkit-transition: width .2s ease-in-out,height .2s ease-in-out,-webkit-transform .38s ease-in-out; */
-  }
-  .sticky-container_in-content .sticky-container__video {
-    padding-bottom: 56.25%;
-    position: relative;
-    height: 0; width: auto;
-    position: relative;
-    bottom: auto; right: auto;
-    overflow: hidden;
-  }
-  .sticky-container_in-content .sticky-container__video iframe {
-    position: absolute;
-    top:0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
+.sticky-container_in-content .sticky-container__video .sticky-container__object {
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
